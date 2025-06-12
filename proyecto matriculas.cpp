@@ -15,12 +15,13 @@ typedef struct {
 } Vehiculo;
 
 void mostrar_menu() {
-	printf("1. Registrar vehiculo\n");
-	printf("2. Registrar revision tecnica\n");
-	printf("3. Buscar por placa\n");
-	printf("4. Listar vehiculos\n");
-	printf("5. Recuperar informacion\n");
-	printf("6. Salir\n");
+	printf("	REGISTRO DE MATRICULACIÓN VEHICULAR	\n");
+	printf("1. Registrar vehiculo.\n");
+	printf("2. Registrar revision tecnica.\n");
+	printf("3. Buscar por placa.\n");
+	printf("4. Listar vehiculos.\n");
+	printf("5. Recuperar informacion.\n");
+	printf("6. Salir.\n");
 }
 
 void registrar_vehiculo(char placa[8], int cedula, int anio, char tipo, float avaluo, Vehiculo (*listaVehiculos)[20], int *cantidadVehiculos) {
@@ -47,45 +48,50 @@ void registrar_vehiculo(char placa[8], int cedula, int anio, char tipo, float av
 bool revision_vehiculo(Vehiculo *vehiculo) {
 	char respuesta;
 	
-	printf("INTENTO %d/3\n", vehiculo->intentos);
-	printf("Frenos en optimo estado? (S/N)\n");
+	printf("	INTENTO %d/3\n", vehiculo->intentos + ); // Se suma + 1 para que imprima "INTENTO 1/3" y no "INTENTO 0/3"
+	printf("¿Frenos en optimo estado? (S/N)\n");
 	scanf(" %c", &respuesta);
 	
 	if(respuesta == 'N') {
 		vehiculo->intentos++;
-		printf("Revision DESAPROVADA\n");
+		system("cls");
+		printf("Revision DESAPROBADA\n");
 		return false;
 	}
 	
-	printf("Suspensi�n en buen estado? (S/N)\n");
+	printf("¿Suspensión en buen estado? (S/N)\n");
 	scanf(" %c", &respuesta);
 	if(respuesta == 'N') {
 		vehiculo->intentos++;
-		printf("Revision DESAPROVADA\n");
+		system("cls");
+		printf("Revision DESAPROBADA\n");
 		return false;
 	}
 	
-	printf("Sistema de escape en optimo estado? (S/N)\n");
+	printf("¿Sistema de escape en optimo estado? (S/N)\n");
 	scanf(" %c", &respuesta);
 	if(respuesta == 'N') {
 		vehiculo->intentos++;
-		printf("Revision DESAPROVADA\n");
+		system("cls");
+		printf("Revision DESAPROBADA\n");
 		return false;
 	}
 	
-	printf("Alineacion en buen estado? (S/N)\n");
+	printf("¿Alineacion en buen estado? (S/N)\n");
 	scanf(" %c", &respuesta);
 	if(respuesta == 'N') {
 		vehiculo->intentos++;
-		printf("Revision DESAPROVADA\n");
+		system("cls");
+		printf("Revision DESAPROBADA\n");
 		return false;
 	}
 	
-	printf("Neumaticos en estado optimo? (S/N)\n");
+	printf("¿Neumaticos en estado optimo? (S/N)\n");
 	scanf(" %c", &respuesta);
 	if(respuesta == 'N') {
 		vehiculo->intentos++;
-		printf("Revision DESAPROVADA\n");
+		system("cls");
+		printf("Revision DESAPROBADA\n");
 		return false;
 	}
 	
@@ -111,6 +117,7 @@ int main() {
 		mostrar_menu();
 		printf("Seleccione la opcion deseada\n");
 		scanf("%d", &opcion);
+		system("cls");
 		
 		switch(opcion) {
 		case 1:
@@ -123,27 +130,29 @@ int main() {
 			printf("Ingrese la placa: ");
 			scanf("%s", &placa);  
 			
-			printf("Ingrese la c�dula: ");
+			printf("Ingrese la cédula: ");
 			scanf("%d", &cedula);
 			
-			printf("Ingrese el a�o: ");
+			printf("Ingrese el año: ");
 			scanf("%d", &anio);
 			
-			// Limpiar buffer antes de leer un car�cter
-			while ((getchar()) != '\n');  // Limpia nueva l�nea pendiente
+			// Limpiar buffer antes de leer un carácter
+			while ((getchar()) != '\n'); 
 			
-			printf("Ingrese el tipo de Vehiculo(carro/moto): (C/M) ");
+			printf("Ingrese el tipo de Vehiculo (Carro/Moto)(C/M): ");
 			scanf("%c", &tipo);
 			
-			printf("Ingrese el aval�o: ");
+			printf("Ingrese el avalúo: ");
 			scanf("%f", &avaluo);
 			
 			registrar_vehiculo(placa, cedula, anio, tipo, avaluo, &listaVehiculos, &cantidadVehiculos);
+
+			system("cls");
 			break;
 		case 2:
 			if(cantidadVehiculos > 0) {
 				int numVehiculo;
-				printf("Que vehiculo desea verficar?\n");
+				printf("¿Que vehiculo desea verficar?\n");
 				scanf("%d", &numVehiculo);
 				
 				if(listaVehiculos[numVehiculo - 1].revisado) {
@@ -163,9 +172,9 @@ int main() {
 					listaVehiculos[numVehiculo - 1].intentos = 0;
 					listaVehiculos[numVehiculo - 1].multas += 50;
 					
-					printf("Alcanzo el maximo de intentos fallidos\n");
+					printf("Alcanzó el maximo de intentos fallidos\n");
 					printf("Acaba de recibir una MULTA\n");
-					printf("---Intetos reiniciados---\n");
+					printf("	Intentos reiniciados	\n");
 				}
 			} else {
 				printf("No hay vehiculos para realizar las verficaciones\n");
@@ -176,7 +185,7 @@ int main() {
 			return 0;
 			break;
 		default:
-			printf("Ingrese una opcion valida\n");
+			printf("Ingrese una opción valida\n");
 			break;
 		}
 	}
